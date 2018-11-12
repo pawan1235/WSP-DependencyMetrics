@@ -21,10 +21,10 @@ public class Main {
 		try {
 
 			AtomicInteger numFile = new AtomicInteger(0);
-			ReadFile fr = new ReadFile();
 			Files.walk(Paths.get("C:\\Users\\PC\\Desktop\\apex-core-master")).forEach(file -> {
 				File dir = new File(file.toString());
 				if (dir.isDirectory()) {
+					ReadFile fr = new ReadFile();
 					for (String myFile : dir.list()) {
 						if (myFile.contains(".java")) {
 							fr.readInFile(dir.toString(), myFile);
@@ -35,7 +35,10 @@ public class Main {
 						Formula pack = new Formula(fr.getNa(), fr.getNc(), fr.getCa(), fr.getCe());
 						ins.add(pack.getInstability());
 						abs.add(pack.getAbstractness());
-						printWriter.printf("%.6f, %.6f \n", pack.getInstability(), pack.getInstability());
+						if(!Double.isNaN(pack.getInstability())&&!Double.isNaN(pack.getAbstractness())) {
+							printWriter.printf("%.6f, %.6f \n", pack.getInstability(), pack.getAbstractness());							
+						}
+
 					}
 				}
 

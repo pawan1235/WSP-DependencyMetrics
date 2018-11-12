@@ -57,5 +57,4 @@ public class ReadFile {
 	public int getNa() {
 		return na;
 	}
-
 }
